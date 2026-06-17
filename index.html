@@ -28,12 +28,61 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* --- 1. 最上部固定ナビゲーションバー --- */
+  /* --- 1. 最上部お知らせバー（固定なし・サイズアップ版） --- */
+  .announcement-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-white);
+    /* スクリプトや固定（sticky）は設定せず、通常の配置に */
+  }
+
+  .announcement-bar {
+    display: flex;
+    width: 200%;
+    animation: constantSlide 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .slide {
+    width: 50%;
+    padding: 18px 20px; /* 上下余白を12pxから18pxに広げてデカく */
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .announcement-wrapper p {
+    margin: 0;
+    font-size: 15px; /* 文字サイズを13pxから15pxに大きく */
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .announcement-wrapper a {
+    color: var(--apple-blue);
+    text-decoration: none;
+  }
+
+  .announcement-wrapper a:hover {
+    text-decoration: underline;
+  }
+
+  @keyframes constantSlide {
+    0%, 45% { transform: translateX(0); }
+    50%, 95% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  /* --- 2. 上部固定ナビゲーションバー --- */
   .nav-bar {
     position: -webkit-sticky; /* Safari対応 */
     position: sticky;
-    top: 0; /* 画面の最上部に固定 */
-    z-index: 1010; /* お知らせバーより上に表示 */
+    top: 0; /* 画面の一番上に固定 */
+    z-index: 1010; /* 最前面に固定 */
     width: 100%;
     height: 48px;
     background-color: rgba(255, 255, 255, 0.8); /* Apple風の半透明白 */
@@ -80,65 +129,13 @@
     color: var(--text-dark);
   }
 
-  /* --- 2. 連動固定お知らせバー --- */
-  .announcement-wrapper {
-    position: -webkit-sticky; /* Safari対応 */
-    position: sticky;
-    top: 48px; /* ナビゲーションバーの高さ分（48px）下に固定 */
-    z-index: 1000;
-    width: 100%;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--bg-white);
-  }
-
-  .announcement-bar {
-    display: flex;
-    width: 200%;
-    animation: constantSlide 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  }
-
-  .slide {
-    width: 50%;
-    padding: 12px 20px;
-    text-align: center;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .announcement-wrapper p {
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.4;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-
-  .announcement-wrapper a {
-    color: var(--apple-blue);
-    text-decoration: none;
-  }
-
-  .announcement-wrapper a:hover {
-    text-decoration: underline;
-  }
-
-  @keyframes constantSlide {
-    0%, 45% { transform: translateX(0); }
-    50%, 95% { transform: translateX(-50%); }
-    100% { transform: translateX(0); }
-  }
-
   /* --- 3. 黒背景ヒーローセクション --- */
   .hero-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 91px); /* 固定バー(48px) + お知らせバー(43px)の分を引く */
+    min-height: calc(100vh - 48px); /* ナビゲーションバーの分だけ高さを計算 */
     background-color: var(--bg-black);
     color: var(--text-light);
     text-align: center;
@@ -366,6 +363,17 @@
 </head>
 <body>
 
+  <div class="announcement-wrapper">
+    <div class="announcement-bar">
+      <div class="slide">
+        <p>English edition is now available. <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/en/">Click here for the English site.</a></p>
+      </div>
+      <div class="slide">
+        <p>定期更新は年3回をベースに運営中。最新情報は <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/news-studio/">News Studio</a> へ</p>
+      </div>
+    </div>
+  </div>
+
   <nav class="nav-bar">
     <div class="nav-inner">
       <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/" class="nav-brand">iPhone知識技能検定(非公式)</a>
@@ -377,17 +385,6 @@
       </ul>
     </div>
   </nav>
-
-  <div class="announcement-wrapper">
-    <div class="announcement-bar">
-      <div class="slide">
-        <p>English edition is now available. <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/en/">Click here for the English site.</a></p>
-      </div>
-      <div class="slide">
-        <p>定期更新は年3回をベースに運営中。最新情報は <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/news-studio/">News Studio</a> へ</p>
-      </div>
-    </div>
-  </div>
 
   <div class="hero-container">
     <div class="hero-eyebrow">MAJOR UPDATE 2026</div>
