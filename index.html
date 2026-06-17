@@ -28,13 +28,64 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* --- 1. 最上部お知らせバー（固定なし・サイズアップ版） --- */
+  /* --- 1. 【大きく変更 & 固定】上部固定ナビゲーションバー --- */
+  .nav-bar {
+    position: -webkit-sticky; /* Safari対応 */
+    position: sticky;
+    top: 0; /* 画面の一番上に固定 */
+    z-index: 1010; /* 最前面に固定 */
+    width: 100%;
+    height: 64px; /* 48pxから64pxにサイズアップしてデカく */
+    background-color: rgba(255, 255, 255, 0.8); /* Apple風の半透明白 */
+    -webkit-backdrop-filter: blur(20px); /* 背景ぼかし効果 */
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+
+  .nav-inner {
+    max-width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    font-size: 16px; /* 文字サイズを少し大きく */
+    font-weight: 600;
+    color: var(--text-dark);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px; /* リンク同士の間隔を少し広げて調整 */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    font-size: 14px; /* リンクの文字サイズも12pxから14pxに大きく */
+    color: var(--text-sub);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-dark);
+  }
+
+  /* --- 2. 【元に戻す】お知らせバー（固定なし・通常サイズ） --- */
   .announcement-wrapper {
     width: 100%;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
     background-color: var(--bg-white);
-    /* スクリプトや固定（sticky）は設定せず、通常の配置に */
   }
 
   .announcement-bar {
@@ -45,7 +96,7 @@
 
   .slide {
     width: 50%;
-    padding: 18px 20px; /* 上下余白を12pxから18pxに広げてデカく */
+    padding: 12px 20px; /* 元のスマートな余白に戻す */
     text-align: center;
     box-sizing: border-box;
     display: flex;
@@ -56,8 +107,8 @@
 
   .announcement-wrapper p {
     margin: 0;
-    font-size: 15px; /* 文字サイズを13pxから15pxに大きく */
-    line-height: 1.5;
+    font-size: 13px; /* 元の13pxに戻す */
+    line-height: 1.4;
     font-weight: 500;
     letter-spacing: -0.01em;
   }
@@ -77,65 +128,13 @@
     100% { transform: translateX(0); }
   }
 
-  /* --- 2. 上部固定ナビゲーションバー --- */
-  .nav-bar {
-    position: -webkit-sticky; /* Safari対応 */
-    position: sticky;
-    top: 0; /* 画面の一番上に固定 */
-    z-index: 1010; /* 最前面に固定 */
-    width: 100%;
-    height: 48px;
-    background-color: rgba(255, 255, 255, 0.8); /* Apple風の半透明白 */
-    -webkit-backdrop-filter: blur(20px); /* 背景ぼかし効果 */
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-  }
-
-  .nav-inner {
-    max-width: 1024px;
-    height: 100%;
-    margin: 0 auto;
-    padding: 0 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .nav-brand {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-dark);
-    text-decoration: none;
-    letter-spacing: -0.01em;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-links a {
-    font-size: 12px;
-    color: var(--text-sub);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .nav-links a:hover {
-    color: var(--text-dark);
-  }
-
   /* --- 3. 黒背景ヒーローセクション --- */
   .hero-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 48px); /* ナビゲーションバーの分だけ高さを計算 */
+    min-height: calc(100vh - 64px); /* 大きくなったナビゲーションバーの分だけ計算 */
     background-color: var(--bg-black);
     color: var(--text-light);
     text-align: center;
@@ -351,8 +350,11 @@
 
   /* --- レスポンシブ対応 (スマホ画面最適化) --- */
   @media (max-width: 768px) {
+    .nav-bar { height: 56px; } /* スマホではバーを少しスリムにして画面を広く */
     .nav-inner { padding: 0 16px; }
-    .nav-links { gap: 14px; }
+    .nav-brand { font-size: 14px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 12px; }
     .hero-title { font-size: 36px; }
     .hero-subtitle { font-size: 18px; }
     .section-title { font-size: 32px; }
@@ -362,17 +364,6 @@
 </style>
 </head>
 <body>
-
-  <div class="announcement-wrapper">
-    <div class="announcement-bar">
-      <div class="slide">
-        <p>English edition is now available. <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/en/">Click here for the English site.</a></p>
-      </div>
-      <div class="slide">
-        <p>定期更新は年3回をベースに運営中。最新情報は <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/news-studio/">News Studio</a> へ</p>
-      </div>
-    </div>
-  </div>
 
   <nav class="nav-bar">
     <div class="nav-inner">
@@ -385,6 +376,17 @@
       </ul>
     </div>
   </nav>
+
+  <div class="announcement-wrapper">
+    <div class="announcement-bar">
+      <div class="slide">
+        <p>English edition is now available. <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/en/">Click here for the English site.</a></p>
+      </div>
+      <div class="slide">
+        <p>定期更新は年3回をベースに運営中。最新情報は <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/news-studio/">News Studio</a> へ</p>
+      </div>
+    </div>
+  </div>
 
   <div class="hero-container">
     <div class="hero-eyebrow">MAJOR UPDATE 2026</div>
