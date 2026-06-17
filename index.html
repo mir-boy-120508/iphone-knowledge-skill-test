@@ -28,16 +28,16 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* --- 1. 【大きく変更 & 固定】上部固定ナビゲーションバー --- */
+  /* --- 1. 【大きく変更 & 最上部固定】ナビゲーションバー --- */
   .nav-bar {
     position: -webkit-sticky; /* Safari対応 */
     position: sticky;
     top: 0; /* 画面の一番上に固定 */
-    z-index: 1010; /* 最前面に固定 */
+    z-index: 1010; /* 最前面に表示 */
     width: 100%;
-    height: 64px; /* 48pxから64pxにサイズアップしてデカく */
+    height: 64px; /* 64pxの大きなバー */
     background-color: rgba(255, 255, 255, 0.8); /* Apple風の半透明白 */
-    -webkit-backdrop-filter: blur(20px); /* 背景ぼかし効果 */
+    -webkit-backdrop-filter: blur(20px); /* 背景ぼかし */
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -54,7 +54,7 @@
   }
 
   .nav-brand {
-    font-size: 16px; /* 文字サイズを少し大きく */
+    font-size: 16px; /* 文字を大きく */
     font-weight: 600;
     color: var(--text-dark);
     text-decoration: none;
@@ -63,14 +63,14 @@
 
   .nav-links {
     display: flex;
-    gap: 28px; /* リンク同士の間隔を少し広げて調整 */
+    gap: 28px; /* リンク間隔を広めに */
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
   .nav-links a {
-    font-size: 14px; /* リンクの文字サイズも12pxから14pxに大きく */
+    font-size: 14px; /* リンク文字を大きく */
     color: var(--text-sub);
     text-decoration: none;
     transition: color 0.2s ease;
@@ -80,7 +80,7 @@
     color: var(--text-dark);
   }
 
-  /* --- 2. 【元に戻す】お知らせバー（固定なし・通常サイズ） --- */
+  /* --- 2. 【固定なし・左から右へ流れる】お知らせバー --- */
   .announcement-wrapper {
     width: 100%;
     overflow: hidden;
@@ -91,12 +91,13 @@
   .announcement-bar {
     display: flex;
     width: 200%;
-    animation: constantSlide 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    /* 【修正】左から右へエンドレスに流すアニメーション */
+    animation: constantSlideLeftToRight 8s linear infinite;
   }
 
   .slide {
     width: 50%;
-    padding: 12px 20px; /* 元のスマートな余白に戻す */
+    padding: 12px 20px; /* 元のスマートなサイズ */
     text-align: center;
     box-sizing: border-box;
     display: flex;
@@ -107,7 +108,7 @@
 
   .announcement-wrapper p {
     margin: 0;
-    font-size: 13px; /* 元の13pxに戻す */
+    font-size: 13px; /* 元のスマートな13px */
     line-height: 1.4;
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -122,9 +123,9 @@
     text-decoration: underline;
   }
 
-  @keyframes constantSlide {
-    0%, 45% { transform: translateX(0); }
-    50%, 95% { transform: translateX(-50%); }
+  /* 左から右へ流れるキーフレーム */
+  @keyframes constantSlideLeftToRight {
+    0% { transform: translateX(-50%); }
     100% { transform: translateX(0); }
   }
 
@@ -134,7 +135,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - 64px); /* 大きくなったナビゲーションバーの分だけ計算 */
+    min-height: calc(100vh - 64px); /* ナビゲーションバーの高さ分を考慮 */
     background-color: var(--bg-black);
     color: var(--text-light);
     text-align: center;
@@ -350,7 +351,7 @@
 
   /* --- レスポンシブ対応 (スマホ画面最適化) --- */
   @media (max-width: 768px) {
-    .nav-bar { height: 56px; } /* スマホではバーを少しスリムにして画面を広く */
+    .nav-bar { height: 56px; } /* スマホではバーを少しコンパクトにして見やすく */
     .nav-inner { padding: 0 16px; }
     .nav-brand { font-size: 14px; }
     .nav-links { gap: 16px; }
