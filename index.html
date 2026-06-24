@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iPhone知識技能検定(非公式)</title>
+<title>検定について - iPhone知識技能検定(非公式)</title>
 <style>
   /* 共通のカラーシステムと基本設定 */
   :root {
@@ -28,16 +28,16 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* --- 1. 【大きく・最上部に固定】ナビゲーションバー --- */
+  /* --- 1. 上部固定ナビゲーションバー --- */
   .nav-bar {
-    position: -webkit-sticky; /* Safari対応 */
+    position: -webkit-sticky;
     position: sticky;
-    top: 0; /* 画面の一番上に固定 */
-    z-index: 1010; /* 最前面に表示 */
+    top: 0;
+    z-index: 1010;
     width: 100%;
-    height: 64px; /* 大きくデカく設定 */
-    background-color: rgba(255, 255, 255, 0.8); /* Apple風の半透明白 */
-    -webkit-backdrop-filter: blur(20px); /* 背景ぼかし効果 */
+    height: 64px;
+    background-color: rgba(255, 255, 255, 0.8);
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -54,7 +54,7 @@
   }
 
   .nav-brand {
-    font-size: 16px; /* 文字を大きく */
+    font-size: 16px;
     font-weight: 600;
     color: var(--text-dark);
     text-decoration: none;
@@ -63,14 +63,14 @@
 
   .nav-links {
     display: flex;
-    gap: 28px; /* リンク間隔をゆったり配置 */
+    gap: 28px;
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
   .nav-links a {
-    font-size: 14px; /* リンク文字を大きく */
+    font-size: 14px;
     color: var(--text-sub);
     text-decoration: none;
     transition: color 0.2s ease;
@@ -80,7 +80,7 @@
     color: var(--text-dark);
   }
 
-  /* --- 2. 【固定なし・右から左に流れて止まる】お知らせバー --- */
+  /* --- 2. お知らせバー（右から左に流れて止まる） --- */
   .announcement-wrapper {
     width: 100%;
     overflow: hidden;
@@ -91,13 +91,12 @@
   .announcement-bar {
     display: flex;
     width: 200%;
-    /* 【復活】8秒かけて右から左にスライドし、途中でピタッと止まるシステム */
     animation: constantSlideRightToLeft 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
   .slide {
     width: 50%;
-    padding: 12px 20px; /* 元のスマートな余白サイズ */
+    padding: 12px 20px;
     text-align: center;
     box-sizing: border-box;
     display: flex;
@@ -108,7 +107,7 @@
 
   .announcement-wrapper p {
     margin: 0;
-    font-size: 13px; /* 元のスマートな13px */
+    font-size: 13px;
     line-height: 1.4;
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -123,168 +122,129 @@
     text-decoration: underline;
   }
 
-  /* 【修正】右から左へ流れて、綺麗に止まるアニメーション */
   @keyframes constantSlideRightToLeft {
     0%, 45% { transform: translateX(0); }
     50%, 95% { transform: translateX(-50%); }
     100% { transform: translateX(0); }
   }
 
-  /* --- 3. 黒背景ヒーローセクション --- */
-  .hero-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 64px); /* ナビゲーションバーの高さ分を考慮 */
-    background-color: var(--bg-black);
-    color: var(--text-light);
-    text-align: center;
-    padding: 60px 20px;
+  /* --- 3. メインコンテンツエリア --- */
+  .main-content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 24px 120px 24px;
     box-sizing: border-box;
-    position: relative;
   }
 
-  .hero-eyebrow {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: var(--text-sub);
-    margin-bottom: 16px;
-  }
-
-  .hero-title {
-    font-size: 52px;
+  .page-title {
+    font-size: 48px;
     font-weight: 700;
     letter-spacing: -0.015em;
-    line-height: 1.2;
-    margin: 0 0 24px 0;
-    background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .hero-title span {
-    display: block;
-    background: linear-gradient(180deg, #2997ff 0%, #0056b3 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .hero-subtitle {
-    font-size: 21px;
-    color: #a1a1a6;
-    line-height: 1.5;
-    margin: 0 0 40px 0;
-    max-width: 600px;
-  }
-
-  .cta-group {
-    display: flex;
-    gap: 20px;
-  }
-
-  .btn {
-    display: inline-block;
-    font-size: 17px;
-    font-weight: 400;
-    padding: 12px 24px;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-
-  .btn-primary {
-    background-color: var(--apple-blue);
-    color: #ffffff;
-  }
-
-  .btn-primary:hover {
-    background-color: #0077ed;
-  }
-
-  .btn-secondary {
-    color: var(--apple-blue-bright);
-  }
-
-  .btn-secondary:hover {
-    text-decoration: underline;
-  }
-
-  /* --- 4. 2つの検定セクション --- */
-  .content-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 100px 20px;
     text-align: center;
+    margin: 0 0 70px 0;
   }
 
-  .section-title {
-    font-size: 40px;
-    font-weight: 700;
+  .intro-section {
     margin-bottom: 60px;
-    display: block;
-    letter-spacing: -0.01em;
   }
 
-  .exam-grid {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
+  .catchphrase {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin: 0 0 24px 0;
+  }
+
+  .intro-text {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-dark);
+    margin: 0 0 20px 0;
+  }
+
+  .intro-subtext {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-sub);
+    margin: 0;
+  }
+
+  .content-section {
     margin-bottom: 50px;
   }
 
-  .exam-item {
-    flex: 1;
-    text-align: left;
-    padding: 32px;
-    background-color: #f5f5f7;
-    border-radius: 20px;
-    transition: transform 0.2s ease;
-  }
-
-  .exam-item:hover {
-    transform: scale(1.02);
-  }
-
-  .badge-new {
-    font-size: 12px;
+  .section-heading {
+    font-size: 21px;
     font-weight: 700;
-    color: var(--apple-orange);
-    display: block;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: -0.005em;
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .exam-item h3 {
-    font-size: 24px;
-    font-weight: 600;
+  .section-heading::before {
+    content: "■";
+    font-size: 14px;
+    color: var(--text-dark);
+    vertical-align: middle;
+  }
+
+  .section-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dark);
     margin: 0 0 16px 0;
   }
 
-  .exam-item p {
-    font-size: 16px;
-    color: var(--text-sub);
+  .apple-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+  }
+
+  .apple-list li {
+    font-size: 15px;
     line-height: 1.6;
-    margin: 0;
+    color: var(--text-dark);
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 12px;
+  }
+
+  .apple-list li::before {
+    content: "▪";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--text-dark);
+    font-size: 10px;
   }
 
   .link-arrow {
     color: var(--apple-blue);
-    font-size: 19px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 400;
     display: inline-flex;
     align-items: center;
     gap: 4px;
     text-decoration: none;
+    margin-bottom: 12px;
   }
-  
+
   .link-arrow:hover {
     text-decoration: underline;
   }
 
-  /* --- 5. 免責事項 & サイトマップフッター --- */
+  .sub-heading {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 32px 0 12px 0;
+    color: var(--text-dark);
+  }
+
+  /* --- 4. 免責事項 & 新サイトマップフッター --- */
   footer {
     background-color: #f5f5f7;
     border-top: 1px solid var(--border-color);
@@ -315,6 +275,7 @@
     text-decoration: underline;
   }
 
+  /* 【アップデート】ご指定の3カラム・サイトマップグリッド */
   .sitemap-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -350,17 +311,24 @@
     text-decoration: underline;
   }
 
-  /* --- レスポンシブ対応 (スマホ画面最適化) --- */
+  /* クレジット表記スタイル */
+  .footer-copyright {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 40px;
+    text-align: left;
+  }
+
+  /* レスポンシブ対応 */
   @media (max-width: 768px) {
-    .nav-bar { height: 56px; } /* スマホでもバランス良く少しスリムに調整 */
+    .nav-bar { height: 56px; }
     .nav-inner { padding: 0 16px; }
     .nav-brand { font-size: 14px; }
     .nav-links { gap: 16px; }
     .nav-links a { font-size: 12px; }
-    .hero-title { font-size: 36px; }
-    .hero-subtitle { font-size: 18px; }
-    .section-title { font-size: 32px; }
-    .exam-grid { flex-direction: column; gap: 24px; }
+    .page-title { font-size: 34px; margin-bottom: 40px; }
+    .catchphrase { font-size: 22px; }
+    .main-content { padding: 50px 20px 80px 20px; }
     .sitemap-grid { grid-template-columns: 1fr; gap: 30px; }
   }
 </style>
@@ -372,7 +340,7 @@
       <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/" class="nav-brand">iPhone知識技能検定(非公式)</a>
       <ul class="nav-links">
         <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/">ホーム</a></li>
-        <li><a href="#exams">検定</a></li>
+        <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/#exams">検定</a></li>
         <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/news-studio/">News</a></li>
         <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/terms/">規約</a></li>
       </ul>
@@ -390,41 +358,104 @@
     </div>
   </div>
 
-  <div class="hero-container">
-    <div class="hero-eyebrow">MAJOR UPDATE 2026</div>
-    <h1 class="hero-title">
-      新しくなった、
-      <span>iPhone知識技能検定(非公式)</span>
-    </h1>
-    <p class="hero-subtitle">
-      大型アップデート完了。<br>
-      より洗練された試験体験と、新たな挑戦がここに。<br>
-      今こそ、進化した検定へ。
-    </p>
-    <div class="cta-group">
-      <a href="#exams" class="btn btn-primary">検定一覧を見る</a>
-      <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/news-studio/statement/" class="btn btn-secondary">私たちの考えを読む &gt;</a>
-    </div>
-  </div>
+  <main class="main-content">
+    
+    <h1 class="page-title">検定について</h1>
 
-  <div id="exams" class="content-container">
-    <span class="section-title">2つの検定</span>
-    <div class="exam-grid">
-      <div class="exam-item">
-        <span class="badge-new">New!</span>
-        <h3>研鑽 iPhone知識技能検定</h3>
-        <p>知識と理解を測る。<br>iPhoneの歴史、技術、そしてAppleの思想まで。</p>
-      </div>
-      <div class="exam-item">
-        <span class="badge-new">New!</span>
-        <h3>実用 iPhone知識技能検定</h3>
-        <p>使いこなしを測る。<br>日常操作からトラブル対応まで、実践的なスキルを評価。</p>
-      </div>
-    </div>
-    <div style="text-align: center;">
-      <a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/about/" class="link-arrow">検定の詳細について &gt;</a>
-    </div>
-  </div>
+    <section class="intro-section">
+      <h2 class="catchphrase">iPhoneを、ただ使うだけで終わっていませんか。</h2>
+      <p class="intro-text">
+        「iPhone知識技能検定（非公式）」は、<br>
+        Appleの思想と、iPhoneの知識・スキルを体系的に測るために設計された検定です。
+      </p>
+      <p class="intro-subtext">
+        単なるクイズではありません。<br>
+        "知っている"と"使いこなせる"を、明确に分けて評価します。
+      </p>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-heading">検定の目的</h2>
+      <p class="section-desc">本検定は、以下の3つを目的としています。</p>
+      <ul class="apple-list">
+        <li>iPhoneに関する知識の体系化</li>
+        <li>実用的な操作スキルの可視化</li>
+        <li>学習・成長の指標の提供</li>
+      </ul>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-heading">2つの検定</h2>
+      <p class="section-desc">本検定は、性質の異なる2つの検定で構成されています。</p>
+
+      <h3 class="sub-heading">研鑽 iPhone知識技能検定</h3>
+      <p class="section-desc">知識と理解を測る検定です。</p>
+      <ul class="apple-list">
+        <li>iPhoneの歴史</li>
+        <li>技術仕様</li>
+        <li>Appleの設計思想</li>
+        <li>用語・概念の理解</li>
+      </ul>
+      <p class="intro-subtext" style="margin-top: -10px; margin-bottom: 20px;">単なる暗記ではなく、背景まで理解しているかが問われます。</p>
+
+      <h3 class="sub-heading">実用 iPhone知識技能検定</h3>
+      <p class="section-desc">使いこなせるかを測る検定です。</p>
+      <ul class="apple-list">
+        <li>基本操作</li>
+        <li>応用機能の活用</li>
+        <li>トラブル対応</li>
+        <li>効率的な使い方</li>
+      </ul>
+      <p class="intro-subtext" style="margin-top: -10px;">日常で本当に役立つスキルを評価します。</p>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-heading">評価の考え方</h2>
+      <p class="section-desc">本検定では、以下の2つの軸で評価を行います。</p>
+      <ul class="apple-list">
+        <li>理解しているか（知識・思考）</li>
+        <li>使いこなせるか（実践・応用）</li>
+      </ul>
+      <p class="intro-subtext" style="margin-top: -10px;">この両方を満たして初めて、iPhoneを本質的に理解していると考えます。</p>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-heading">検定の特徴</h2>
+      <ul class="apple-list">
+        <li>段階的な等級制度（5級～1級）</li>
+        <li>合格基準は80%以上</li>
+        <li>初心者から上級者まで対応</li>
+        <li>学習用PDFと試験を連動</li>
+      </ul>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-heading">対象者</h2>
+      <ul class="apple-list">
+        <li>iPhoneをもっと深く理解したい人</li>
+        <li>Appleの思想に興味がある人</li>
+        <li>自分のレベルを客観的に知りたい人</li>
+        <li>ガジェットが好きな人</li>
+      </ul>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-heading">注意事項</h2>
+      <p class="section-desc">
+        本検定は非公式のコンテンツであり、<br>
+        Appleおよびその関連会社とは一切関係ありません。
+      </p>
+    </section>
+
+    <section class="content-section">
+      <h2 class="section-heading">次へ</h2>
+      <p class="section-desc">検定の詳細や受験方法については、以下をご確認ください。</p>
+      <div><a href="#" class="link-arrow">等級について &gt;</a></div>
+      <div><a href="#" class="link-arrow">受験方法 &gt;</a></div>
+      <div><a href="#" class="link-arrow">各検定ページ &gt;</a></div>
+    </section>
+
+  </main>
 
   <footer>
     <div class="footer-inner">
@@ -436,6 +467,16 @@
       </div>
 
       <div class="sitemap-grid">
+        <div class="sitemap-col">
+          <h2>検定を知る</h2>
+          <ul>
+            <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/about/">検定の概要</a></li>
+            <li><a href="#">研鑽検定の詳細</a></li>
+            <li><a href="#">実用検定の詳細</a></li>
+            <li><a href="#">等級と合格基準</a></li>
+            <li><a href="#">受験方法</a></li>
+          </ul>
+        </div>
         <div class="sitemap-col">
           <h2>試験に挑む</h2>
           <ul>
@@ -449,19 +490,19 @@
         <div class="sitemap-col">
           <h2>サポートと情報</h2>
           <ul>
-            <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/news-studio/">News Studio（運営履歴）</a></li>
-            <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/terms/">利用規約</a></li>
-            <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/contact/">お問い合わせ窓口</a></li>
-          </ul>
-        </div>
-        <div class="sitemap-col">
-          <h2>言語 / Language</h2>
-          <ul>
-            <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/">日本語 (Japanese)</a></li>
-            <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/en/">English (英語)</a></li>
+            <li><a href="#">よくある質問 (FAQ)</a></li>
+            <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/news-studio/">News Studio</a></li>
+            <li><a href="https://mir-boy-120508.github.io/iphone-knowledge-skill-test/contact/">お問い合わせ</a></li>
+            <li><a href="#">非公式について</a></li>
+            <li><a href="#">相互リンク</a></li>
           </ul>
         </div>
       </div>
+
+      <div class="footer-copyright">
+        © 2026 iPhone知識技能検定 All Rights Reserved.
+      </div>
+
     </div>
   </footer>
 
